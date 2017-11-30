@@ -36,6 +36,9 @@ install:
 build_script:
   - appveyor\build.cmd
 
+test_script:
+  - appveyor\test.cmd
+
 artifacts:
   - path: artifacts
     name: php_xdebug-%APPVEYOR_REPO_TAG_NAME%-%PHP_REL%
