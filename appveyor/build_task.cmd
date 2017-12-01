@@ -41,7 +41,7 @@ setlocal enableextensions enabledelayedexpansion
 
 		if %errorlevel% neq 0 exit /b 3
 
-		nmake test
+		nmake test TESTS=%APPVEYOR_BUILD_FOLDER%\tests
 
 		if %errorlevel% neq 0 exit /b 3
 
