@@ -10,7 +10,7 @@ setlocal enableextensions enabledelayedexpansion
 			exit /b 3
 		)
 
-		cmd /c !SDK_RUNNER! -t %APPVEYOR_BUILD_FOLDER%\appveyor\test_task.bat
+		cmd /c !SDK_RUNNER! -t %APPVEYOR_BUILD_FOLDER%\appveyor\test_task.cmd
 
 		if %errorlevel% neq 0 exit /b 3
 

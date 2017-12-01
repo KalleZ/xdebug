@@ -11,6 +11,9 @@ if /i "%APPVEYOR_REPO_BRANCH:~0,7%" equ "XDEBUG_" (
     set BRANCH=master
     set STABILITY=staging
 )
+
+set BRANCH=%PHP_REL%
+
 set DEPS_DIR=%PHP_BUILD_CACHE_BASE_DIR%\deps-%BRANCH%-%PHP_SDK_VC%-%PHP_SDK_ARCH%
 if not exist "%DEPS_DIR%" (
     echo "%DEPS_DIR%" doesn't exist
