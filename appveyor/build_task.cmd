@@ -41,6 +41,10 @@ setlocal enableextensions enabledelayedexpansion
 
 		if %errorlevel% neq 0 exit /b 3
 
+		nmake test
+
+		if %errorlevel% neq 0 exit /b 3
+
 		cd /d %APPVEYOR_BUILD_FOLDER%
 
 		if not exist "%APPVEYOR_BUILD_FOLDER%\build\ext\php_xdebug.dll" exit /b 3
