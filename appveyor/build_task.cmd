@@ -34,14 +34,20 @@ setlocal enableextensions enabledelayedexpansion
 		if %errorlevel% neq 0 exit /b 3
 
 		nmake /NOLOGO
-
 		if %errorlevel% neq 0 exit /b 3
 
 		nmake install
 
 		if %errorlevel% neq 0 exit /b 3
 
-		nmake test TESTS=%APPVEYOR_BUILD_FOLDER%\tests
+		set TEST_PHP_EXECUTABLE=%APPVEYOR_BUILD_FOLDER%\build\php.exe
+		set TEST_PHP_ARGS="-n -d foo=1"
+		if "%OPCACHE%" equ "1" set TEST_PHP_ARGS=%TEST_PHP_ARGS% -d zend_extension=opcache.so -d opcache.enable=1 -d opcache.enable_cli=1
+		set TEST_PHP_ARGS=%TEST_PHP_ARGS% -d zend_extension=%APPVEYOR_BUILD_FOLDER%\build\ext\php_xdebug.dll
+		set SKIP_IPV6_TESTS=1
+		set REPORT_EXIT_STATUS=1
+		%TEST_PHP_EXECUTABLE% %TEST_PHP_ARGS% -v
+		%TEST_PHP_EXECUTABLE% -n run-tests.php -q -x --show-diff
 
 		if %errorlevel% neq 0 exit /b 3
 
